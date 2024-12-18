@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,8 +7,8 @@
      <meta name="googlebot" content="index, follow"> 
     <meta name="keywords" content="YouTube,youtube,video,videos,VIDEOS,Videos,vid,media,content,فيديوهات ,مشغل فيديوهات"> 
     <meta content="author" content="Mohammed Alaa Mohammed">
-        <!--icon -->
-        <link rel="icon" href="https://cdn.icon-icons.com/icons2/159/PNG/256/multimedia_video_player_22460.png">
+        
+        <link rel="icon" href="https://www.freepik.com/icon/play_16555997#fromView=keyword&page=1&position=19&uuid=00edbd5d-e039-410d-94fe-707394cec58b">
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +26,7 @@
         }
         .container {
             padding: 15px;
+            
         }
         .video-container {
             margin-top: 40px;
@@ -36,14 +38,19 @@
         .video-url-input {
             margin-top: 20px;
             text-align: center;
+            
         }
         .video-url-input input {
             padding: 10px;
             width: 100%;
             max-width: 500px;
             margin-bottom: 10px;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 16px;
+            border:none;
+            color:#2e2e2e;
+            font-weight:bold;
+            
         }
         .video-url-input button {
             padding: 10px;
@@ -53,15 +60,18 @@
             color: #fff;
             cursor: pointer;
             margin-top: 5px;
+            margin-left:30px;
         }
         .video-url-input button:hover {
             background: #0056b3;
+            margin-left:30px;
         }
         #player {
             width: 100%;
             height: 100%;
             max-height: 500px;
             border: none;
+            
         }
        .controls {
            height:100%;
@@ -151,17 +161,51 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+            
         }
         footer p {
             margin: 0;
         }
+    
+    
+        /* إضافة تصميم احترافي للعنصر select */
+/* تصميم الـ select */
+#speedSelect {
+  width: 160px; /* عرض القائمة */
+  height: 35px; /* ارتفاع القائمة */
+  background-color: #f9f9f9; /* لون الخلفية */
+  border: 2px solid #0078d4; /* لون الحدود */
+  border-radius: 6px; /* الزوايا الدائرية */
+  font-size: 14px; /* حجم النص */
+  color: #333; /* لون النص */
+  padding: 5px; /* مسافة داخلية */
+  outline: none; /* إزالة الخط الخارجي */
+  cursor: pointer; /* تغيير مؤشر الفأرة */
+  transition: all 0.3s ease; /* تأثير الانتقال */
+    margin-left:-325px;
+    margin-top:-5px;
+}
+
+/* تأثير عند التمرير */
+#speedSelect:hover {
+  background-color: #e8f4fc; /* لون خلفية مختلف */
+  border-color: #005bb5; /* لون الحدود عند التمرير */
+}
+
+/* تنسيق الخيارات داخل القائمة */
+#speedSelect option {
+  padding: 5px; /* مسافة داخلية للخيار */
+  background-color: #ffffff; /* لون خلفية الخيارات */
+  color: #333; /* لون النص للخيارات */
+}
+    
     </style>
 </head>
 <body>
     
     <div class="container">
         <div class="video-url-input">
-            <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL" onkeyup="checkUrlInput()">
+            <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL : " onkeyup="checkUrlInput()">
             <button id="loadVideoBtn"><i class="fas fa-play-circle"></i> Load Video</button>
             <button id="clearBtn"><i class="fas fa-times-circle"></i> Clear URL</button>
         </div>
@@ -187,18 +231,39 @@
     <button id="loopBtn"><i class="fas fa-redo"></i> Loop</button>
     <!-- New Reload Button -->
     <button id="reloadBtn"><i class="fas fa-sync-alt"></i> Reload Player</button>
+           
+           
+           <!-- New Elementes-->
+           
+           <div style="display: flex; align-items: center; justify-content: flex-end;">
+  <b dir="rtl" style="margin-left: 200px; border:outset#fdfdcc 4px; background-color:#000; padding:4px;">تحديد سرعة الفيديو :&#xbb;</b>
+  <select id="speedSelect" class="sec">
+    <option value="1">1x</option>
+    <option value="1.5">1.5x</option>
+    <option value="2">2x</option>
+  </select>
 </div>
-
+          
+</div>
        
     </div>
-
     <footer>
-        <p>&copy; 2024 Mohammed Alaa Mohamed. All Rights Reserved.</p>
+        <p>&copy; 2024 Mohammed Alaa. All Rights Reserved
+            <sub>&#xae; Version.3</sub>
+        </p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+    
+    // تغييير السرعه 
+    const speedSelect = document.getElementById('speedSelect');
+
+speedSelect.addEventListener('change', () => {
+    const speed = parseFloat(speedSelect.value);
+    player.contentWindow.postMessage(`{"event":"command","func":"setPlaybackRate","args":[${speed}]}`, '*');
+});
     // Refresh Video
     const reloadBtn = document.getElementById('reloadBtn');
 
@@ -365,9 +430,16 @@ reloadBtn.addEventListener('click', function () {
         });
 
         // Loop functionality
+    
         loopBtn.addEventListener('click', function () {
             isLooping = !isLooping;
-            loopBtn.style.backgroundColor = isLooping ? '#ff5733' : '#555';
+            loopBtn.style.backgroundColor = isLooping ? '#ff5733' : '#555'
+            Swal.fire({
+  title: "Note for You",
+  text: "سيتم تكرار الفيديو حين تقوم بتوقفه",
+  icon: "info"
+});
+            ;
         });
     
     
