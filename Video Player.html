@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Visual Studio Code 1.82.0"> 
+     <meta name="googlebot" content="index, follow"> 
+    <meta name="keywords" content="YouTube,youtube,video,videos,VIDEOS,Videos,vid,media,content,فيديوهات ,مشغل فيديوهات"> 
+    <meta content="author" content="Mohammed Alaa Mohammed">
+        
+        <link rel="icon" href="https://www.freepik.com/icon/play_16555997#fromView=keyword&page=1&position=19&uuid=00edbd5d-e039-410d-94fe-707394cec58b">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom YouTube Video Player | Mohammed Alaa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .container {
+            padding: 15px;
+        }
+        .video-container {
+            margin-top: 40px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .video-url-input {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .video-url-input input {
+            padding: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .video-url-input button {
+            padding: 10px;
+            background: #0069d9;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .video-url-input button:hover {
+            background: #0056b3;
+        }
+        #player {
+            width: 100%;
+            height: 100%;
+            max-height: 500px;
+            border: none;
+        }
+       .controls {
+           height:100%;
+    display: flex;
+    flex-wrap: wrap; /* السماح بتوزيع الأزرار في عدة صفوف */
+    justify-content: space-between; /* توزيع الأزرار بالتساوي */
+    padding: 20px;
+    background: #444;
+    border-radius: 8px;
+    margin-top: 15px;
+    width: 105%;
+    box-sizing: border-box;
+    max-width: 1270px; /* أقصى عرض للحاوية */
+    margin-left: -8px;
+    margin-right: auto;
+}
+
+/* تنسيق الأزرار */
+.controls button {
+    background-color: #555;
+    border: none;
+    padding: 12px 25px; /* حشو مريح مع حجم مناسب */
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: calc(50% - 10px); /* تحديد عرض الزر ليكون 50% مع مسافة بين الأزرار */
+    height: 60px; /* تحديد ارتفاع الأزرار */
+    margin-bottom: 15px; /* مسافة بين الأزرار في الأسطر المختلفة */
+    box-sizing: border-box;
+}
+
+/* تأثير hover للأزرار */
+.controls button:hover {
+    background-color: #777;
+    transform: scale(1.09);
+}
+
+/* تخصيص زر إعادة التحميل */
+#reloadBtn {
+    margin-left:8px;
+    width:158px;
+    background-color: #28a745;
+    border: none;
+    
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* تأثير hover لزر إعادة التحميل */
+#reloadBtn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* تخصيص التنسيق عند الشاشات المتوسطة */
+@media (min-width: 768px) {
+    .controls button {
+        width: calc(50% - 10px); /* عرض الزر 50% مع مسافة بين الأزرار */
+    }
+}
+
+/* تخصيص التنسيق عند الشاشات الكبيرة */
+@media (min-width: 1024px) {
+    .controls button {
+        width: calc(50% - 10px); /* عرض الزر 50% مع مسافة بين الأزرار */
+    }
+}
+
+.video-time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    color: #ddd;
+    font-size: 16px;
+}
+        footer {
+            background-color: #222;
+            color: #888;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="video-url-input">
+            <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL" onkeyup="checkUrlInput()">
+            <button id="loadVideoBtn"><i class="fas fa-play-circle"></i> Load Video</button>
+            <button id="clearBtn"><i class="fas fa-times-circle"></i> Clear URL</button>
+        </div>
+
+        <div class="video-container">
+            <div id="player"></div>
+        </div>
+        <!--وقت الفيديو-->
+ <div class="video-time">
+            <span id="currentTime">00:00</span>
+            <span id="remainingTime">00:00</span>
+        </div>
+        
+        
+        
+       <div class="controls">
+    <button id="playPauseBtn"><i class="fas fa-play"></i> Play/Pause</button>
+    <button id="volumeUpBtn"><i class="fas fa-volume-up"></i> Volume Up</button>
+    <button id="volumeDownBtn"><i class="fas fa-volume-down"></i> Volume Down</button>
+    <button id="muteBtn"><i class="fas fa-volume-mute"></i> Mute</button>
+    <button id="fullscreenBtn"><i class="fas fa-expand"></i> Fullscreen</button>
+    <button id="stopBtn"><i class="fas fa-stop"></i> Stop</button>
+    <button id="loopBtn"><i class="fas fa-redo"></i> Loop</button>
+    <!-- New Reload Button -->
+    <button id="reloadBtn"><i class="fas fa-sync-alt"></i> Reload Player</button>
+</div>
+
+       
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Mohammed Alaa Mohamed. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+    // Refresh Video
+    const reloadBtn = document.getElementById('reloadBtn');
+
+// Reload the player and refresh the video
+reloadBtn.addEventListener('click', function () {
+    if (ytPlayer) {
+        ytPlayer.destroy(); // Destroy the current player
+    }
+    const videoID = getYouTubeVideoID(videoUrlInput.value); // Get the current video ID
+    if (videoID) {
+        loadYouTubePlayer(videoID); // Reload the video player with the same video
+    }
+});
+    
+    
+        const videoUrlInput = document.getElementById('videoUrl');
+        const loadVideoBtn = document.getElementById('loadVideoBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const volumeUpBtn = document.getElementById('volumeUpBtn');
+        const volumeDownBtn = document.getElementById('volumeDownBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const loopBtn = document.getElementById('loopBtn');
+        const currentTimeElement = document.getElementById('currentTime');
+        const remainingTimeElement = document.getElementById('remainingTime');
+        let ytPlayer;
+        let isMuted = false;
+        let isPlaying = false;
+        let isLooping = false;
+
+        // Helper function to extract YouTube Video ID
+        function getYouTubeVideoID(url) {
+            const regExp = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/)([a-zA-Z0-9_-]{11}))|(?:https?:\/\/youtu\.be\/([a-zA-Z0-9_-]{11}))/;
+            const match = url.match(regExp);
+            return match ? (match[1] || match[2]) : null;
+        }
+
+        // Load Video
+        loadVideoBtn.addEventListener('click', function () {
+            const videoID = getYouTubeVideoID(videoUrlInput.value);
+            if (videoID) {
+                loadYouTubePlayer(videoID);
+            } else {
+                alert('Invalid YouTube URL');
+            }
+        });
+
+        // Clear URL
+        clearBtn.addEventListener('click', function () {
+            videoUrlInput.value = '';
+            if (ytPlayer) {
+                ytPlayer.destroy();
+            }
+        });
+
+        // Load YouTube player
+        function loadYouTubePlayer(videoID) {
+            ytPlayer = new YT.Player('player', {
+                videoId: videoID,
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onPlaybackQualityChange': onPlayerStateChange,
+                    'onPlayerStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // On Player Ready
+        function onPlayerReady(event) {
+            playPauseBtn.disabled = false;
+            volumeUpBtn.disabled = false;
+            volumeDownBtn.disabled = false;
+            muteBtn.disabled = false;
+            fullscreenBtn.disabled = false;
+            stopBtn.disabled = false;
+            loopBtn.disabled = false;
+
+            // Update time every second
+            setInterval(updateTime, 1000);
+        }
+
+        // On Player State Change
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                isPlaying = false;
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i> Play';
+            }
+
+            if (event.data === YT.PlayerState.ENDED && isLooping) {
+                ytPlayer.seekTo(0);
+                ytPlayer.playVideo();
+            }
+        }
+
+        // Update current and remaining time
+        function updateTime() {
+            const currentTime = ytPlayer.getCurrentTime();
+            const duration = ytPlayer.getDuration();
+            const remainingTime = duration - currentTime;
+
+            currentTimeElement.textContent = formatTime(currentTime);
+            remainingTimeElement.textContent = formatTime(remainingTime);
+        }
+
+        // Format time in mm:ss
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        // Play/Pause functionality
+        playPauseBtn.addEventListener('click', function () {
+            if (isPlaying) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        });
+
+        // Volume control
+        volumeUpBtn.addEventListener('click', function () {
+            const volume = ytPlayer.getVolume();
+            ytPlayer.setVolume(Math.min(volume + 10, 100));
+        });
+
+        volumeDownBtn.addEventListener('click', function () {
+            const volume = ytPlayer.getVolume();
+            ytPlayer.setVolume(Math.max(volume - 10, 0));
+        });
+
+        // Mute functionality
+        muteBtn.addEventListener('click', function () {
+            if (isMuted) {
+                ytPlayer.unMute();
+                isMuted = false;
+            } else {
+                ytPlayer.mute();
+                isMuted = true;
+            }
+        });
+
+        // Fullscreen functionality
+        fullscreenBtn.addEventListener('click', function () {
+            const iframe = document.getElementById('player');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { // Firefox
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari
+                iframe.webkitRequestFullscreen();
+            }
+        });
+
+        // Stop Video functionality
+        stopBtn.addEventListener('click', function () {
+            ytPlayer.stopVideo();
+        });
+
+        // Loop functionality
+        loopBtn.addEventListener('click', function () {
+            isLooping = !isLooping;
+            loopBtn.style.backgroundColor = isLooping ? '#ff5733' : '#555';
+        });
+    
+    
+    
+    </script>
+</body>
+</html>
