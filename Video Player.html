@@ -19,28 +19,27 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
 
-        /* تنسيق عام للشاشات الصغيرة */
+       /* تنسيق عام للشاشات الصغيرة */
 @media (max-width: 576px) {
     .video-url-input input {
-        width: 90%; /* تقليل عرض الحقل */
+        width: 90%; /* عرض الحقل 90% */
         font-size: 14px; /* تقليل حجم النص */
     }
 
     .video-url-input button {
-        width: 100%; /* جعل الأزرار بعرض كامل */
-        margin: 10px 0; /* إضافة مساحة بين الأزرار */
+        width: 100%; /* الأزرار بعرض الشاشة */
+        margin: 10px 0; /* مسافة بين الأزرار */
     }
 
     .controls button {
-        width: 100%; /* الأزرار بعرض الشاشة */
-        height: auto; /* السماح بتعديل الارتفاع */
-        font-size: 14px; /* تصغير النص */
+        width: 100%; /* الأزرار بعرض كامل */
+        height: auto; /* السماح بارتفاع ديناميكي */
+        font-size: 14px; /* تصغير حجم النص */
     }
 
     #speedSelect {
-        width: 100%; /* جعل القائمة المنسدلة تتناسب مع الشاشة */
-        margin-left: 0; /* إزالة الهامش الجانبي */
-        margin-top: 10px; /* إضافة مسافة للأعلى */
+        width: 100%; /* عرض القائمة بنسبة الشاشة */
+        margin: 10px 0; /* مسافة للأعلى */
     }
 
     .video-time {
@@ -53,19 +52,19 @@
 /* تنسيق للشاشات المتوسطة */
 @media (min-width: 577px) and (max-width: 768px) {
     .controls button {
-        width: calc(50% - 10px); /* عرض الأزرار 50% */
-        margin-bottom: 10px; /* تقليل المسافة بين الأزرار */
+        width: calc(50% - 10px); /* الأزرار بعرض 50% */
+        margin-bottom: 10px; /* تقليل المسافات */
         font-size: 15px; /* ضبط النص */
     }
 
     .video-url-input input {
-        width: 95%; /* عرض الحقل */
-        font-size: 16px; /* حجم مناسب للنص */
+        width: 95%; /* تقليل العرض */
+        font-size: 16px; /* حجم نص مناسب */
     }
 
     #speedSelect {
-        width: 80%; /* عرض القائمة المنسدلة */
-        margin: 0 auto; /* توسيط القائمة */
+        width: 80%; /* عرض القائمة */
+        margin: 10px auto; /* توسيط القائمة */
     }
 }
 
@@ -73,126 +72,46 @@
 @media (min-width: 1024px) {
     .video-container {
         max-width: 800px; /* تحديد أقصى عرض */
-        margin: 20px auto; /* توسيط الفيديو */
+        margin: 0 auto; /* توسيط الحاوية */
     }
 
-    .controls {
-        max-width: 800px; /* تحديد أقصى عرض */
-        margin: 20px auto; /* توسيط الأزرار */
+    .controls button {
+        width: calc(33.33% - 15px); /* عرض الأزرار 33.33% */
+        height: 50px; /* ارتفاع موحد */
+        font-size: 16px; /* حجم النص */
     }
-
-    .video-url-input {
-        max-width: 800px; /* تحديد أقصى عرض */
-        margin: 20px auto; /* توسيط الحقل */
-    }
-}
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-        }
-        .container {
-            padding: 15px;
-            
-        }
-        .video-container {
-            margin-top: 40px;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-        }
-        .video-url-input {
-            margin-top: 20px;
-            text-align: center;
-            
-        }
-        .video-url-input input {
-            padding: 10px;
-            width: 100%;
-            max-width: 500px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            border:none;
-            color:#2e2e2e;
-            font-weight:bold;
-            
-        }
-        .video-url-input button {
-            padding: 10px;
-            background: #0069d9;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            cursor: pointer;
-            margin-top: 5px;
-            margin-left:30px;
-        }
-        .video-url-input button:hover {
-            background: #0056b3;
-            margin-left:30px;
-        }
-        #player {
-            width: 100%;
-            height: 100%;
-            max-height: 500px;
-            border: none;
-            
-        }
-       .controls {
-           height:100%;
-    display: flex;
-    flex-wrap: wrap; /* السماح بتوزيع الأزرار في عدة صفوف */
-    justify-content: space-between; /* توزيع الأزرار بالتساوي */
-    padding: 20px;
-    background: #444;
-    border-radius: 8px;
-    margin-top: 15px;
-    width: 105%;
-    box-sizing: border-box;
-    max-width: 1270px; /* أقصى عرض للحاوية */
-    margin-left: -8px;
-    margin-right: auto;
 }
 
 /* تنسيق الأزرار */
 .controls button {
     background-color: #555;
     border: none;
-    padding: 12px 25px; /* حشو مريح مع حجم مناسب */
-    border-radius: 5px;
-    color: white;
+    padding: 10px 20px; /* مساحة داخلية مريحة */
+    border-radius: 5px; /* زوايا مستديرة */
+    color: white; /* لون النص */
     cursor: pointer;
     text-align: center;
-    font-size: 16px;
+    font-size: 16px; /* حجم النص */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: calc(50% - 10px); /* تحديد عرض الزر ليكون 50% مع مسافة بين الأزرار */
-    height: 60px; /* تحديد ارتفاع الأزرار */
-    margin-bottom: 15px; /* مسافة بين الأزرار في الأسطر المختلفة */
+    margin-bottom: 10px; /* مسافة بين الأزرار */
     box-sizing: border-box;
 }
 
 /* تأثير hover للأزرار */
 .controls button:hover {
     background-color: #777;
-    transform: scale(1.09);
+    transform: scale(1.05);
 }
 
 /* تخصيص زر إعادة التحميل */
 #reloadBtn {
-    margin-left:8px;
-    width:158px;
+    width: 100%; /* عرض ديناميكي */
+    max-width: 200px; /* أقصى عرض */
     background-color: #28a745;
     border: none;
-    
+    padding: 10px 20px; /* مساحة داخلية */
     border-radius: 5px;
     color: white;
-    cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -203,14 +122,73 @@
     transform: scale(1.05);
 }
 
+/* تنسيق select */
+#speedSelect {
+    width: 100%; /* عرض كامل */
+    max-width: 200px; /* أقصى عرض */
+    height: 35px;
+    background-color: #f9f9f9;
+    border: 2px solid #0078d4;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px auto; /* توسيط العنصر */
+}
 
+/* تأثير hover لـ select */
+#speedSelect:hover {
+    background-color: #e8f4fc;
+    border-color: #005bb5;
+}
+
+/* خيارات القائمة */
+#speedSelect option {
+    padding: 5px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* تنسيق الأزرار مع الأيقونات */
+#setlink {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px auto; /* توسيط الزر */
+}
+
+#setlink i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+#setlink:hover {
+    background-color: #0056b3;
+}
+
+#setlink:active {
+    background-color: #003d80;
+}
+
+/* تنسيق النصوص الزمنية */
 .video-time {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    align-items: center;
     color: #ddd;
     font-size: 16px;
+    margin-top: 20px;
 }
+
         footer {
             background-color: #222;
             color: #888;
