@@ -19,122 +19,118 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-        }
-        .container {
-            padding: 15px;
-            
-        }
-        .video-container {
-            margin-top: 40px;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-        }
-        .video-url-input {
-            margin-top: 20px;
-            text-align: center;
-            
-        }
-        .video-url-input input {
-            padding: 10px;
-            width: 100%;
-            max-width: 500px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            border:none;
-            color:#2e2e2e;
-            font-weight:bold;
-            
-        }
-        .video-url-input button {
-            padding: 10px;
-            background: #0069d9;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            cursor: pointer;
-            margin-top: 5px;
-            margin-left:30px;
-        }
-        .video-url-input button:hover {
-            background: #0056b3;
-            margin-left:30px;
-        }
-        #player {
-            width: 100%;
-            height: 100%;
-            max-height: 500px;
-            border: none;
-            display:flex;
-            
-        }
-       .controls {
-           height:100%;
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.container {
+    padding: 15px;
+}
+
+.video-container {
+    margin-top: 40px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.video-url-input {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.video-url-input input {
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    color: #2e2e2e;
+    font-weight: bold;
+}
+
+.video-url-input button {
+    padding: 10px;
+    background: #0069d9;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 30px;
+    font-size: 14px;
+}
+
+.video-url-input button:hover {
+    background: #0056b3;
+}
+
+#player {
+    width: 100%;
+    height: 100%;
+    max-height: 500px;
+    border: none;
     display: flex;
-    flex-wrap: wrap; /* السماح بتوزيع الأزرار في عدة صفوف */
-    justify-content: space-between; /* توزيع الأزرار بالتساوي */
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding: 20px;
     background: #444;
     border-radius: 8px;
     margin-top: 15px;
-    width: 105%;
+    width: 100%;
     box-sizing: border-box;
-    max-width: 1270px; /* أقصى عرض للحاوية */
-    margin-left: -8px;
-    margin-right: auto;
 }
 
-/* تنسيق الأزرار */
 .controls button {
     background-color: #555;
     border: none;
-    padding: 12px 25px; /* حشو مريح مع حجم مناسب */
+    padding: 12px 25px;
     border-radius: 5px;
     color: white;
     cursor: pointer;
     text-align: center;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: calc(50% - 10px); /* تحديد عرض الزر ليكون 50% مع مسافة بين الأزرار */
-    height: 60px; /* تحديد ارتفاع الأزرار */
-    margin-bottom: 15px; /* مسافة بين الأزرار في الأسطر المختلفة */
+    flex: 1 1 calc(48% - 10px); /* عرض الزر مرن */
+    height: 60px;
+    margin: 5px;
     box-sizing: border-box;
 }
 
-/* تأثير hover للأزرار */
 .controls button:hover {
     background-color: #777;
     transform: scale(1.09);
 }
 
-/* تخصيص زر إعادة التحميل */
 #reloadBtn {
-    margin-left:8px;
-    width:158px;
+    margin-left: 8px;
     background-color: #28a745;
     border: none;
-    
     border-radius: 5px;
     color: white;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    flex: 1 1 calc(48% - 10px);
+    height: 60px;
+    margin: 5px;
 }
 
-/* تأثير hover لزر إعادة التحميل */
 #reloadBtn:hover {
     background-color: #218838;
     transform: scale(1.05);
 }
-    
 
 .video-time {
     display: flex;
@@ -143,78 +139,125 @@
     color: #ddd;
     font-size: 16px;
 }
-        footer {
-            background-color: #222;
-            color: #888;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            
-        }
-        footer p {
-            margin: 0;
-        }
-    
-    
-        /* إضافة تصميم احترافي للعنصر select */
-/* تصميم الـ select */
+
+footer {
+    background-color: #222;
+    color: #888;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
 #speedSelect {
-  width: 160px; /* عرض القائمة */
-  height: 35px; /* ارتفاع القائمة */
-  background-color: #f9f9f9; /* لون الخلفية */
-  border: 2px solid #0078d4; /* لون الحدود */
-  border-radius: 6px; /* الزوايا الدائرية */
-  font-size: 14px; /* حجم النص */
-  color: #333; /* لون النص */
-  padding: 5px; /* مسافة داخلية */
-  outline: none; /* إزالة الخط الخارجي */
-  cursor: pointer; /* تغيير مؤشر الفأرة */
-  transition: all 0.3s ease; /* تأثير الانتقال */
-    margin-left:-335px;
-    margin-top:-5px;
+    width: 100%;
+    max-width: 160px;
+    height: 35px;
+    background-color: #f9f9f9;
+    border: 2px solid #0078d4;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    padding: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: -5px;
 }
 
-/* تأثير عند التمرير */
 #speedSelect:hover {
-  background-color: #e8f4fc; /* لون خلفية مختلف */
-  border-color: #005bb5; /* لون الحدود عند التمرير */
+    background-color: #e8f4fc;
+    border-color: #005bb5;
 }
 
-/* تنسيق الخيارات داخل القائمة */
 #speedSelect option {
-  padding: 5px; /* مسافة داخلية للخيار */
-  background-color: #ffffff; /* لون خلفية الخيارات */
-  color: #333; /* لون النص للخيارات */
+    padding: 5px;
+    background-color: #ffffff;
+    color: #333;
 }
-    #setlink {
-    display: flex; /* لجعل الأيقونة والنص بجانب بعضهما */
-    align-items: center; /* محاذاة العناصر عموديًا */
-    background-color: #007bff; /* لون الخلفية */
-    color: white; /* لون النص */
-    border: none; /* إزالة الحدود */
-    border-radius: 5px; /* حواف دائرية */
-    padding: 10px 20px; /* مساحة داخلية */
-    font-size: 16px; /* حجم النص */
-    margin-left:120px;    
-    margin-top:15px;    
-    cursor: pointer; /* إظهار مؤشر اليد */
-    transition: background-color 0.3s ease; /* تأثير التغيير عند التحويم */
+
+#setlink {
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-    
-    #setlink i {
-    margin-right: 8px; /* مسافة بين الأيقونة والنص */
-    font-size: 18px; /* حجم الأيقونة */
+
+#setlink i {
+    margin-right: 8px;
+    font-size: 18px;
 }
 
 #setlink:hover {
-    background-color: #0056b3; /* لون عند التحويم */
+    background-color: #0056b3;
 }
 
 #setlink:active {
-    background-color: #003d80; /* لون عند الضغط */
+    background-color: #003d80;
 }
+
+/* وسائل الإعلام لجعل التصميم متجاوبًا */
+@media (max-width: 768px) {
+    .video-url-input input {
+        width: 100%;
+        max-width: 90%;
+    }
+
+    .video-url-input button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .controls button {
+        flex: 1 1 100%;
+    }
+
+    #reloadBtn {
+        flex: 1 1 100%;
+    }
+
+    footer {
+        font-size: 14px;
+    }
+
+    #speedSelect {
+        max-width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-url-input input {
+        font-size: 14px;
+    }
+
+    .controls button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #reloadBtn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    footer {
+        padding: 8px;
+    }
+}
+
     </style>
 </head>
 <body>
