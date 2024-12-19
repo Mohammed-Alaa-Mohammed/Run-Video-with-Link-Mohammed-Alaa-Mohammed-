@@ -230,11 +230,37 @@ footer p {
                 margin-left:30px;"
                 ><i class="fas fa-times-circle"></i> Clear URL</button>
             <br>
-              <button id="setlink" class="button-link"
-                  onclick="setValue()"
-                  ><i
-                  style=""
-                  class="fas fa-user"></i>Random Link</button>
+              <button id="setlink" class="button-link" onclick="setValue()">
+    <i class="fas fa-user"></i>
+    <span class="button-text">Random Link</span>
+</button>
+
+<style>
+    .button-link {
+        background-color: #007bff; /* لون الخلفية */
+        color: white; /* لون النص */
+        border: none; /* إزالة الحدود */
+        padding: 10px 20px; /* إضافة مسافة داخل الزر */
+        border-radius: 5px; /* حواف دائرية */
+        display: inline-flex; /* استخدام flexbox لتمكين تنسيق الأيقونة والنص */
+        align-items: center; /* محاذاة العناصر عموديًا */
+        font-size: 16px; /* حجم الخط */
+    }
+
+    .button-link i {
+        margin-right: 8px; /* المسافة بين الأيقونة والنص */
+        font-size: 18px; /* حجم الأيقونة */
+    }
+
+    .button-text {
+        white-space: nowrap; /* لضمان عدم التفاف النص */
+    }
+
+    .button-link:hover {
+        background-color: #0056b3; /* تغيير اللون عند التمرير */
+    }
+</style>
+
         </div>
 
         <div class="video-container">
