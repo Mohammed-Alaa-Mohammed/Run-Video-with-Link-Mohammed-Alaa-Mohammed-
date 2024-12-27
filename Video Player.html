@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+<script>
+alert("Checking Internet after Start...")
+</script>
+-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <html lang="en">
 <script>document.getElementById("videoUrl").focus();</script>
@@ -18,104 +23,124 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-       /* القواعد الأساسية */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #222;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-}
-.container {
-    padding: 15px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.video-container {
-    margin-top: 40px;
-    background: #000;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-}
-.video-url-input {
-    margin-top: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .container {
+            padding: 15px;
+            
+        }
+        .video-container {
+            margin-top: 40px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .video-url-input {
+            margin-top: 20px;
+            text-align: center;
+            
+        }
+        .video-url-input input {
+            padding: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            border:none;
+            color:#2e2e2e;
+            font-weight:bold;
+            
+        }
+        .video-url-input button {
+            padding: 10px;
+            background: #344eac;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-left:30px;
+        }
+        .video-url-input button:hover {
+            background: #0056b3;
+            margin-left:30px;
+        }
+        #player {
+            width: 100%;
+            height: 100%;
+            max-height: 500px;
+            border: none;
+            display:flex;
+            
+        }
+       .controls {
+           height:100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-.video-url-input input {
-    padding: 10px;
-    width: 100%;
-    max-width: 500px;
-    border-radius: 5px;
-    font-size: 16px;
-    border: none;
-    color: #2e2e2e;
-    font-weight: bold;
-    box-sizing: border-box;
-}
-.video-url-input button {
-    padding: 10px;
-    background: #0069d9;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-sizing: border-box;
-}
-.video-url-input button:hover {
-    background: #0056b3;
-}
-#player {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    border: none;
-    display: flex;
-}
-.controls {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    flex-wrap: wrap; /* السماح بتوزيع الأزرار في عدة صفوف */
+    justify-content: space-between; /* توزيع الأزرار بالتساوي */
     padding: 20px;
     background: #444;
     border-radius: 8px;
     margin-top: 15px;
+    width: 105%;
     box-sizing: border-box;
+    max-width: 1270px; /* أقصى عرض للحاوية */
+    margin-left: -8px;
+    margin-right: auto;
 }
+
+/* تنسيق الأزرار */
 .controls button {
     background-color: #555;
     border: none;
-    padding: 12px 25px;
+    padding: 12px 25px; /* حشو مريح مع حجم مناسب */
     border-radius: 5px;
     color: white;
     cursor: pointer;
     text-align: center;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    width: calc(50% - 10px); /* تحديد عرض الزر ليكون 50% مع مسافة بين الأزرار */
+    height: 60px; /* تحديد ارتفاع الأزرار */
+    margin-bottom: 15px; /* مسافة بين الأزرار في الأسطر المختلفة */
+    box-sizing: border-box;
 }
+
+/* تأثير hover للأزرار */
 .controls button:hover {
     background-color: #777;
     transform: scale(1.09);
 }
+
+/* تخصيص زر إعادة التحميل */
 #reloadBtn {
+    margin-left:8px;
+    width:158px;
     background-color: #28a745;
     border: none;
+    
     border-radius: 5px;
     color: white;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+/* تأثير hover لزر إعادة التحميل */
 #reloadBtn:hover {
     background-color: #218838;
     transform: scale(1.05);
 }
+    
+
 .video-time {
     display: flex;
     justify-content: space-between;
@@ -123,95 +148,125 @@ body {
     color: #ddd;
     font-size: 16px;
 }
-footer {
-    background-color: #222;
-    color: #888;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-footer p {
-    margin: 0;
-}
+        footer {
+            background-color: #222;
+            color: #888;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            
+        }
+        footer p {
+            margin: 0;
+        }
+    
+    
+        /* إضافة تصميم احترافي للعنصر select */
+/* تصميم الـ select */
 #speedSelect {
-    width: 100%;
-    max-width: 200px;
-    height: 35px;
-    background-color: #f9f9f9;
-    border: 2px solid #0078d4;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #333;
-    padding: 5px;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  width: 160px; /* عرض القائمة */
+  height: 35px; /* ارتفاع القائمة */
+  background-color: #f9f9f9; /* لون الخلفية */
+  border: 2px solid #0078d4; /* لون الحدود */
+  border-radius: 6px; /* الزوايا الدائرية */
+  font-size: 14px; /* حجم النص */
+  color: #333; /* لون النص */
+  padding: 5px; /* مسافة داخلية */
+  outline: none; /* إزالة الخط الخارجي */
+  cursor: pointer; /* تغيير مؤشر الفأرة */
+  transition: all 0.3s ease; /* تأثير الانتقال */
+    margin-left:-335px;
+    margin-top:-5px;
 }
+
+/* تأثير عند التمرير */
 #speedSelect:hover {
-    background-color: #e8f4fc;
-    border-color: #005bb5;
+  background-color: #e8f4fc; /* لون خلفية مختلف */
+  border-color: #005bb5; /* لون الحدود عند التمرير */
 }
+
+/* تنسيق الخيارات داخل القائمة */
 #speedSelect option {
-    padding: 5px;
-    background-color: #ffffff;
-    color: #333;
+  padding: 5px; /* مسافة داخلية للخيار */
+  background-color: #ffffff; /* لون خلفية الخيارات */
+  color: #333; /* لون النص للخيارات */
 }
-#setlink {
-    display: flex;
-    align-items: center;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
-    justify-content: center;
+    #setlink {
+    display: flex; /* لجعل الأيقونة والنص بجانب بعضهما */
+    align-items: center; /* محاذاة العناصر عموديًا */
+    background-color: #0085FF; /* لون الخلفية */
+    color: white; /* لون النص */
+    border: none; /* إزالة الحدود */
+    border-radius: 5px; /* حواف دائرية */
+    padding: 10px -20px; /* مساحة داخلية */
+    font-size: 16px; /* حجم النص */
+    margin-left:120px;    
+    margin-top:15px;    
+    cursor: pointer; /* إظهار مؤشر اليد */
+    transition: background-color 0.3s ease; /* تأثير التغيير عند التحويم */
 }
-#setlink:hover {
-    background-color: #0056b3;
+    
+    #setlink i {
+    margin-right: 8px; /* مسافة بين الأيقونة والنص */
+    font-size: 18px; /* حجم الأيقونة */
+    color : #FFFCFF;    
+    }
+        
+
+#setlink:hover , .i {
+    background-color: #2e2e4e; /* لون عند التحويم */
+    
 }
+
 #setlink:active {
-    background-color: #003d80;
+    background-color: #003d80; /* لون عند الضغط */
 }
-
-/* تصميم متجاوب باستخدام Media Queries */
-@media (max-width: 992px) {
-    .video-url-input input,
-    .video-url-input button {
-        width: 100%;
+    #btn-dm {
+        background-color:#4c4455;
+        color :#CDD;
+        margin-left:12px;
+        width:190px;
+        height:45px;
+        padding:50 auto;
+        transform:translateY(8px);
+        cursor:pointer;
+        border:#fff groove 1px;
+        border-radius: 0 0  100px 100px;
+        border-color: #00eeee;
+        font-weight:bold;
+        transition:all 0.7s;
+        algin-content:left;
     }
-}
-@media (max-width: 768px) {
-    #player {
-        max-height: 300px;
+    
+    #btn-dm:hover{
+        top:-30px;
+        left:-30px;
+        background-color:transparent;
+        text-color:transparent;
+        border-radius: 50px;
+        box-shadow: 0 0 150px 15px #0fffff;
+        opacity:.8;
+        padding: 10px 15px;
+        margin-top:20px;
+        background-color:#2e2e2e;
+        display: inline-block;
     }
-    .video-time {
-        font-size: 14px;
+    
+    #btn-dm:hover::before{
+        width:105%;
+        color:#ff;
     }
-    .controls {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    
+        
+    #i-dm:hover{
+        box-shadow: 0 0 50px 10px #2e2e2e;
+        color:#0fffff;
+        
+        opacity:1;
     }
-}
-@media (max-width: 576px) {
-    body {
-        font-size: 14px;
-    }
-    #speedSelect {
-        max-width: 150px;
-    }
-    #reloadBtn {
-        font-size: 14px;
-        padding: 8px 20px;
-    }
-}
-
-
-
+        
     </style>
 </head>
 <body>
@@ -230,37 +285,15 @@ footer p {
                 margin-left:30px;"
                 ><i class="fas fa-times-circle"></i> Clear URL</button>
             <br>
-              <button id="setlink" class="button-link" onclick="setValue()">
-    <i class="fas fa-user"></i>
-    <span class="button-text">Random Link</span>
-</button>
-
-<style>
-    .button-link {
-        background-color: #007bff; /* لون الخلفية */
-        color: white; /* لون النص */
-        border: none; /* إزالة الحدود */
-        padding: 10px 20px; /* إضافة مسافة داخل الزر */
-        border-radius: 5px; /* حواف دائرية */
-        display: inline-flex; /* استخدام flexbox لتمكين تنسيق الأيقونة والنص */
-        align-items: center; /* محاذاة العناصر عموديًا */
-        font-size: 16px; /* حجم الخط */
-    }
-
-    .button-link i {
-        margin-right: 8px; /* المسافة بين الأيقونة والنص */
-        font-size: 18px; /* حجم الأيقونة */
-    }
-
-    .button-text {
-        white-space: nowrap; /* لضمان عدم التفاف النص */
-    }
-
-    .button-link:hover {
-        background-color: #0056b3; /* تغيير اللون عند التمرير */
-    }
-</style>
-
+              <button id="setlink" class="button-link"
+                  onclick="setValue()"
+                  ><i
+                  style=""
+                  class="fa-solid fa-cubes"></i></i>Random Link</button>
+        <button onclick="alert('Wait Update..')" class="btn-down" id="btn-dm">
+            <i  class="fas fa-rocket" id="i-dm"></i>
+            Download Video
+        </button>
         </div>
 
         <div class="video-container">
@@ -288,8 +321,8 @@ footer p {
            
            <!-- New Elementes-->
            
-           <div>
-  <b dir="rtl">تحديد سرعة الفيديو :&#xbb;</b>
+           <div style="display: flex; align-items: center; justify-content: flex-end;">
+  <b dir="rtl" style="margin-left: 190px; border:outset#fdfdcc 4px; background-color:#000; padding:4px;">تحديد سرعة الفيديو :&#xbb;</b>
   <select id="speedSelect" class="sec">
     <option value="1">1x</option>
     <option value="1.5">1.5x</option>
@@ -321,8 +354,10 @@ footer p {
 
 
     function setValue() {
+        alert("تم استدعاء رابط")
         var textToAdd = "https://youtu.be/f8fGUmgnQEQ?feature=shared"; // النص الذي سيتم إضافته
         document.getElementById("videoUrl").value = textToAdd; // إضافة النص إلى خانة الإدخال
+        
     }
 
     
