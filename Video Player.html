@@ -42,6 +42,16 @@ alert("Checking Internet after Start...")
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         }
+    								#videoUrl:hover{
+    								    border:5px groove #2e2e2e;
+    								    border:none;
+    								    background-color : #ddd;
+    								    border-radius:50px;
+    								}
+    
+    
+    
+    
         .video-url-input {
             margin-top: 20px;
             text-align: center;
@@ -233,11 +243,13 @@ alert("Checking Internet after Start...")
         transform:translateY(8px);
         cursor:pointer;
         border:#fff groove 1px;
-        border-radius: 0 0  100px 100px;
+        border-radius: 0 0  50px 50px;
         border-color: #00eeee;
         font-weight:bold;
         transition:all 0.7s;
         algin-content:left;
+        box-shadow: 0 0px 500px 15px #AAAAbd;
+        opacity:.9;
     }
     
     #btn-dm:hover{
@@ -252,6 +264,7 @@ alert("Checking Internet after Start...")
         margin-top:20px;
         background-color:#2e2e2e;
         display: inline-block;
+        transform: translateY(15px);
     }
     
     #btn-dm:hover::before{
@@ -290,7 +303,7 @@ alert("Checking Internet after Start...")
                   ><i
                   style=""
                   class="fa-solid fa-cubes"></i></i>Random Link</button>
-        <button onclick="alert('Wait Update..')" class="btn-down" id="btn-dm">
+        <button onclick="confirm('Sorry..Wait Update..')" class="btn-down" id="btn-dm">
             <i  class="fas fa-rocket" id="i-dm"></i>
             Download Video
         </button>
@@ -537,7 +550,7 @@ reloadBtn.addEventListener('click', function () {
     
         loopBtn.addEventListener('click', function () {
             isLooping = !isLooping;
-            loopBtn.style.backgroundColor = isLooping ? '#ff5733' : '#555'
+            loopBtn.style.backgroundColor = isLooping ? '#ff5733' : '#555777'
             Swal.fire({
   title: "Note for You",
   text: "سيتم تكرار الفيديو حين تقوم بتوقفه",
